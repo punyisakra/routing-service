@@ -21,7 +21,7 @@ public class RegistryListener {
     }
 
     @RabbitListener(queues = {"${rabbitmq.routing.key}"})
-    public void processRegistryList(final RegistryEvent event) {
+    public void processRegistryEvent(final RegistryEvent event) {
         logger.info("Process message from queue, event: {}", event);
         registryService.processEvent(event);
     }
