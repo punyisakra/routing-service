@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+/**
+ * Represent a running application instance, used for
+ * registering its name and port with the registry-service
+ * and also for routing the call from the routing-service
+ * */
 @Component
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

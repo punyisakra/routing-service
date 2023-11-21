@@ -5,6 +5,10 @@ import com.assignment.coda.routingservice.registry.service.RegistryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * A service abstract class providing based to {@link RoundRobinRoutingServiceImpl}
+ * to provide logic for registry queue
+ */
 public abstract class RoutingService {
 
     protected final Logger logger = LoggerFactory.getLogger(RoutingService.class);
@@ -15,5 +19,10 @@ public abstract class RoutingService {
         this.registryService = registryService;
     }
 
+    /**
+     * Get a next instance to pass the Http request to
+     * @return a next {@link Instance} to pass the request to, return null if
+     * the registry queue is empty
+     */
     public abstract Instance getNextInstance();
 }

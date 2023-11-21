@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
+/**
+ * Routing API Controller for forwarding HTTP request to corresponding services
+ * */
 @RestController
 public class RoutingController {
 
@@ -28,12 +31,18 @@ public class RoutingController {
         this.simpleService = simpleService;
     }
 
+    /**
+     * Simple POST API: forwarding the request to simple-api-service
+     *
+     * @param payload   the json payload of type {@link String}
+     * @return the response {@link String} returned from simple-api-service, wrapped with {@link org.springframework.http.HttpStatus HttpStatus}
+     * */
     @RequestMapping(
-            value = "/routes",
+            value = "/simples",
             method = RequestMethod.POST,
             consumes = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> route(@RequestBody String payload) {
-        logger.info("{} /routes, REQUEST PAYLOAD: {}", RequestMethod.POST, payload);
+    public ResponseEntity<String> simples(@RequestBody String payload) {
+        logger.info("{} /simples, REQUEST PAYLOAD: {}", RequestMethod.POST, payload);
         Instance nextInstance = routingService.getNextInstance();
         ResponseEntity<String> response = Objects.isNull(nextInstance)
                 ? ResponseEntity.noContent().build()

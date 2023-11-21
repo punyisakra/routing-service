@@ -14,10 +14,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @ExtendWith(SpringExtension.class)
-class RegisterEventAddTest {
+class RegistryEventAddTest {
 
     @InjectMocks
-    private RegisterEventAdd registerEventAdd;
+    private RegistryEventAdd registryEventAdd;
 
     @Test
     public void process_actionMatches_addInstanceToQueue() {
@@ -25,7 +25,7 @@ class RegisterEventAddTest {
         RegistryEvent event = new RegistryEvent("add", instance);
         Queue<Instance> queue = new LinkedList<>();
 
-        registerEventAdd.process(queue, event);
+        registryEventAdd.process(queue, event);
 
         assertThat(queue.size(), is(1));
         assertThat(queue.peek(), is(instance));
@@ -37,7 +37,7 @@ class RegisterEventAddTest {
         RegistryEvent event = new RegistryEvent("remove", instance);
         Queue<Instance> queue = new LinkedList<>();
 
-        registerEventAdd.process(queue, event);
+        registryEventAdd.process(queue, event);
 
         assertThat(queue.size(), is(0));
     }

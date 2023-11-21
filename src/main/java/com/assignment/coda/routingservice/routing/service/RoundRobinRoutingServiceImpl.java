@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Queue;
 
+/**
+ * A service class providing an extension to {@link RoutingService}
+ * to provide round-robin logic of registry queue
+ */
 @Service
 public class RoundRobinRoutingServiceImpl extends RoutingService {
 
@@ -16,6 +20,11 @@ public class RoundRobinRoutingServiceImpl extends RoutingService {
         super(registryService);
     }
 
+    /**
+     * Get a next instance to pass the Http request to in a round-robin manner
+     * @return a next {@link Instance} to pass the request to, return null if
+     * the registry queue is empty
+     */
     @Override
     @Synchronized
     public Instance getNextInstance() {

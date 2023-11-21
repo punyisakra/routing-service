@@ -18,13 +18,13 @@ class RegistryEventActionFactoryTest {
     @Test
     public void getAction_addAction_returnRegisterEventAdd() {
         RegistryEventAction action = registryEventActionFactory.getAction("add");
-        assertThat(action, instanceOf(RegisterEventAdd.class));
+        assertThat(action, instanceOf(RegistryEventAdd.class));
     }
 
     @Test
     public void getAction_removeAction_returnRegisterEventRemove() {
         RegistryEventAction action = registryEventActionFactory.getAction("remove");
-        assertThat(action, instanceOf(RegisterEventRemove.class));
+        assertThat(action, instanceOf(RegistryEventRemove.class));
     }
 
     @Test

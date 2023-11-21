@@ -8,6 +8,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Registry-service Listener that listen on an event published via RabbitMQ
+ */
 @Service
 public class RegistryListener {
 
@@ -20,6 +23,12 @@ public class RegistryListener {
         this.registryService = registryService;
     }
 
+    /**
+     * Consume a registry event published by registry-service and process
+     * the event on local registry queue
+     * @param event a {@link RegistryEvent} represent a change made on the registry list
+     *              in registry-service
+     */
     @RabbitListener(queues = {"${rabbitmq.routing.key}"})
     public void processRegistryEvent(final RegistryEvent event) {
         logger.info("Process message from queue, event: {}", event);

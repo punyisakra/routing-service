@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * A service class providing an implementation to {@link RegistryService}
+ * to handle registry event logic
+ */
 @Service
 public class RegistryServiceImpl implements RegistryService {
 
@@ -24,6 +28,13 @@ public class RegistryServiceImpl implements RegistryService {
         this.registryEventActionFactory = registryEventActionFactory;
     }
 
+    /**
+     * Process registry event based on the event's action. Depend on
+     * {@link RegistryEventActionFactory} to create corresponding {@link RegistryEventAction}
+     * to perform an action on local registry queue.
+     * @param event a {@link RegistryEvent} represent a change made on the registry list
+     *              in registry-service
+     */
     @Override
     public void processEvent(RegistryEvent event) {
         RegistryEventAction action = registryEventActionFactory.getAction(event.getAction());
@@ -31,6 +42,11 @@ public class RegistryServiceImpl implements RegistryService {
         logger.info("Finished process: {}", instanceQueue);
     }
 
+    /**
+     * Retrieve local registry queue, which reflect the registry list in registry-service
+     * @return a queue of type {@link Queue<Instance>} that represented all {@link Instance}s which were
+     * registered with the registry-service
+     */
     @Override
     public Queue<Instance> getRegistryQueue() {
         return instanceQueue;

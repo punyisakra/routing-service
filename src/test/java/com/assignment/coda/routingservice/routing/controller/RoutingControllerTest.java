@@ -33,13 +33,13 @@ class RoutingControllerTest {
     private RoutingController routingController;
 
     @Test
-    public void route_hasInstance_postRequestToTheInstance() {
+    public void simples_hasInstance_postRequestToTheInstance() {
         String payload = "{\"test\":1}";
         Instance instance = new Instance("name", "1234");
 
         when(routingServiceMock.getNextInstance()).thenReturn(instance);
         when(simpleServiceMock.post(instance, payload)).thenReturn(ResponseEntity.ok("ok"));
-        ResponseEntity<String> response = routingController.route(payload);
+        ResponseEntity<String> response = routingController.simples(payload);
 
         assertThat(response, notNullValue());
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -48,11 +48,11 @@ class RoutingControllerTest {
     }
 
     @Test
-    public void route_hasNoInstance_donNotPostRequest() {
+    public void simples_hasNoInstance_donNotPostRequest() {
         String payload = "{\"test\":1}";
 
         when(routingServiceMock.getNextInstance()).thenReturn(null);
-        ResponseEntity<String> response = routingController.route(payload);
+        ResponseEntity<String> response = routingController.simples(payload);
 
         assertThat(response, notNullValue());
         assertThat(response.getStatusCode(), is(HttpStatus.NO_CONTENT));
